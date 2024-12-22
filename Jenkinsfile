@@ -42,6 +42,11 @@ pipeline { // Defines a pipeline
         sh 'docker build -t javulna-0.1 .' // Builds a Docker image with the specified tag
       }   
     }
+    stage ('docker scann') { // Defines the 'docker build' stage
+      steps { 
+        sh ' trivy image --format json -o docker-report.json javulna-0.1 ' // Builds a Docker image with the specified tag
+      }   
+    }   
     stage ('docker run container') { // Defines the 'docker run container' stage
       steps { // Specifies the steps to be executed within this stage
         sh 'docker stop app || true' // Stops any running container with the name 'app'
