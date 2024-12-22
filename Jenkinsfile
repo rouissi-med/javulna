@@ -22,7 +22,7 @@ pipeline { // Defines a pipeline
     }
     stage ('Secret scanner') { 
       steps { 
-        sh 'gitleaks detect --source  javulna/ -f json --report-path gitleaks.json'
+        sh 'gitleaks detect --source  . -f json --report-path gitleaks.json'
       }   
     }
     stage ('Unit Test') { // Defines the 'Unit Test' stage
