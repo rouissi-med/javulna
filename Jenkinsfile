@@ -20,6 +20,11 @@ pipeline { // Defines a pipeline
              -Dsonar.login=sqp_3933d3a1cce91acf08a78d1716cf5fee1eb50c65"
       }
     }
+    stage ('Secret scanner') { 
+      steps { 
+        sh 'gitleaks detect --source  javulna/ -f json --report-path gitleaks.json'
+      }   
+    }
     stage ('Unit Test') { // Defines the 'Unit Test' stage
       steps { // Specifies the steps to be executed within this stage
         sh 'mvn test' // Runs the Maven command to execute the unit tests
