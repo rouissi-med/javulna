@@ -13,7 +13,7 @@ pipeline { // Defines a pipeline
     }
     stage ('Secret scanner') { 
       steps { 
-        sh 'gitleaks detect --source  . -f json --report-path gitleaks.json' || true 
+        sh 'gitleaks detect --source  . -f json --report-path gitleaks.json || true'  
       }   
     }
     stage('SonarQube Analysis') {
