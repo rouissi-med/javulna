@@ -15,9 +15,9 @@ pipeline { // Defines a pipeline
     stage('SonarQube Analysis') {
       steps {
         sh "mvn  verify sonar:sonar \
-             -Dsonar.projectKey=TEST1 \
+             -Dsonar.projectKey=test \
              -Dsonar.host.url=http://192.168.27.128:9002 \
-             -Dsonar.login=sqp_24c9c23056ca58b9baf086f13aa08e6a32981f53"
+             -Dsonar.login=sqp_3933d3a1cce91acf08a78d1716cf5fee1eb50c65"
       }
     }
     stage ('Unit Test') { // Defines the 'Unit Test' stage
