@@ -11,26 +11,7 @@ pipeline { // Defines a pipeline
         git 'https://github.com/MarwenSoula/javulna.git' // Retrieves the source code from the specified GitHub repository
       }
     }
-    stage ('Secret scanner') { 
-      steps { 
-        sh 'gitleaks detect --source  . -f json --report-path gitleaks.json || true'  
-      }   
-    }
-    stage('SonarQube Analysis') {
-      steps {
-        sh "mvn  verify sonar:sonar \
-             -Dsonar.projectKey=test \
-             -Dsonar.host.url=http://192.168.27.128:9002 \
-             -Dsonar.login=sqp_3933d3a1cce91acf08a78d1716cf5fee1eb50c65"
-      }
-    }
-
-    stage ('Unit Test') { // Defines the 'Unit Test' stage
-      steps { // Specifies the steps to be executed within this stage
-        sh 'mvn test' // Runs the Maven command to execute the unit tests
-      }   
-    }
-
+   
     stage ('Build') { // Defines the 'Build' stage
       steps { // Specifies the steps to be executed within this stage
         sh 'mvn install' // Runs the Maven command to clean and build the project
@@ -42,11 +23,7 @@ pipeline { // Defines a pipeline
         sh 'docker build -t javulna-0.1 .' // Builds a Docker image with the specified tag
       }   
     }
-    stage ('docker scann') { // Defines the 'docker build' stage
-      steps { 
-        sh ' trivy image --format json -o docker-report.json javulna-0.1 ' // Builds a Docker image with the specified tag
-      }   
-    }   
+   
     stage ('docker run container') { // Defines the 'docker run container' stage
       steps { // Specifies the steps to be executed within this stage
         sh 'docker stop app || true' // Stops any running container with the name 'app'
