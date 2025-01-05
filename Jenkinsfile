@@ -11,6 +11,12 @@ pipeline { // Defines a pipeline
         git 'https://github.com/MarwenSoula/javulna.git' // Retrieves the source code from the specified GitHub repository
       }
     }
+
+    stage ('Secret scanner') { 
+      steps { 
+        sh 'gitleaks detect --source  . -f json --report-path gitleaks.json || true'  
+      }   
+    }
    
     stage ('Build') { // Defines the 'Build' stage
       steps { // Specifies the steps to be executed within this stage
