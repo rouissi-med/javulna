@@ -23,7 +23,7 @@ pipeline { // Defines a pipeline
         sh "mvn clean verify sonar:sonar \
              -Dsonar.projectKey=Rouissi_Test_Sonar \
              -Dsonar.host.url=http://192.168.163.128:9002 \
-             -Dsonar.login=sqp_0eaeeb5f3c112f5c4d466bd59cb8a77e25c9a479
+             -Dsonar.login=sqp_0eaeeb5f3c112f5c4d466bd59cb8a77e25c9a479"
       }
     }
 
