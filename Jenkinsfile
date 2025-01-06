@@ -17,6 +17,21 @@ pipeline { // Defines a pipeline
         sh 'gitleaks detect --source  . -f json --report-path gitleaks.json || true'  
       }   
     }
+
+    stage('SonarQube Analysis') {
+      steps {
+        sh "mvn clean verify sonar:sonar \
+             -Dsonar.projectKey=Rouissi_Test_Sonar \
+             -Dsonar.host.url=http://192.168.163.128:9002 \
+             -Dsonar.login=sqp_0eaeeb5f3c112f5c4d466bd59cb8a77e25c9a479
+      }
+    }
+
+    stage ('Unit Test') { // Defines the 'Unit Test' stage
+      steps { // Specifies the steps to be executed within this stage
+        sh 'mvn test' // Runs the Maven command to execute the unit tests
+      }   
+    }
    
     stage ('Build') { // Defines the 'Build' stage
       steps { // Specifies the steps to be executed within this stage
